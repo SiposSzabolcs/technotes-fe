@@ -22,11 +22,11 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        {/* public routes */}
+        {/* public */}
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />
 
-        {/* Protected Routes */}
+        {/* protected */}
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
             <Route element={<Prefetch />}>
@@ -48,10 +48,10 @@ function App() {
                   <Route path="new" element={<NewNote />} />
                 </Route>
 
-              </Route>{/* End Dash */}
+              </Route>
             </Route>
           </Route>
-        </Route>{/* End Protected Routes */}
+        </Route>
 
       </Route>
     </Routes >
