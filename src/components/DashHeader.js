@@ -112,12 +112,6 @@ const DashHeader = () => {
     let buttonContent
     if (isLoading) {
         buttonContent = <PulseLoader color={"#FFF"} />
-        setTimeout(() => {
-            buttonContent = <>
-                <PulseLoader color={"#FFF"} />
-                <h2>Api currently spun down. Please wait 1-2 minutes for it to start.</h2>
-            </>
-        }, 3000)
     } else {
         buttonContent = (
             <>

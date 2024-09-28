@@ -16,6 +16,7 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [errMsg, setErrMsg] = useState('')
     const [persist, setPersist] = usePersist()
+    const [showMessage, setShowMessage] = useState(false);
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -33,7 +34,16 @@ const Login = () => {
 
     useEffect(() => {
         userRef.current.focus()
-    }, [])
+        let timer;
+        if (isLoading) {
+            timer = setTimeout(() => {
+                setShowMessage(true);
+            }, 3000);
+        } else {
+            setShowMessage(false);
+        }
+        return () => clearTimeout(timer);
+    }, [isLoading])
 
     useEffect(() => {
         setErrMsg('');
@@ -68,7 +78,16 @@ const Login = () => {
 
     const errClass = errMsg ? "errmsg" : "offscreen"
 
-    if (isLoading) return <PulseLoader color={"#FFF"} />
+    if (isLoading) {
+        <PulseLoader color={"#FFF"} />
+        setTimeout(() => {
+            <>
+                <PulseLoader color={"#FFF"} />
+                <h2>Api currently spun down. Please wait 1-2 minutes for it to start.</h2>
+            </>
+        }, 3000)
+    }
+
 
     const content = (
         <section className="public">
@@ -116,6 +135,15 @@ const Login = () => {
                         Trust This Device
                     </label>
                 </form>
+                {isLoading && !showMessage && (
+                    <PulseLoader color={"#FFF"} />
+                )}
+                {showMessage && (
+                    <>
+                        <PulseLoader color={"#FFF"} />
+                        <h2>Api currently spun down. Please wait 1-2 minutes for it to start.</h2>
+                    </>
+                )}
             </main>
             <footer>
                 <Link to="/">Back to Home</Link>
