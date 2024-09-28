@@ -22,6 +22,15 @@ const Login = () => {
 
     const [login, { isLoading }] = useLoginMutation()
 
+    const handleClick = (user) => {
+        if (user === "admin") {
+            setUsername("demoadmin")
+        } else if (user === "employee") {
+            setUsername("demoemployee")
+        }
+        setPassword("demo")
+    }
+
     useEffect(() => {
         userRef.current.focus()
     }, [])
@@ -92,6 +101,8 @@ const Login = () => {
                         required
                     />
                     <button className="form__submit-button">Sign In</button>
+                    <button type="button" className="form__submit-button" onClick={() => handleClick("employee")}>Use Employee demo user</button>
+                    <button type="button" className="form__submit-button" onClick={() => handleClick("admin")}>Use Admin demo user</button>
 
 
                     <label htmlFor="persist" className="form__persist">
