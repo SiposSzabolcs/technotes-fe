@@ -78,17 +78,6 @@ const Login = () => {
 
     const errClass = errMsg ? "errmsg" : "offscreen"
 
-    if (isLoading) {
-        <PulseLoader color={"#FFF"} />
-        setTimeout(() => {
-            <>
-                <PulseLoader color={"#FFF"} />
-                <h2>Api currently spun down. Please wait 1-2 minutes for it to start.</h2>
-            </>
-        }, 3000)
-    }
-
-
     const content = (
         <section className="public">
             <header>
